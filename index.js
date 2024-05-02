@@ -13,7 +13,7 @@ const registerTooltips = ()=>{
             continue;
         }
         target.classList.add('sttt--enabled');
-        target.setAttribute('sttt--title', target.title.replace(/\r(?!\n)/g, '\n'));
+        target.setAttribute('data-sttt--title', target.title.replace(/\r(?!\n)/g, '\n'));
         target.removeAttribute('title');
         let thisTt;
         const pointerDown = ()=>{
@@ -32,7 +32,7 @@ const registerTooltips = ()=>{
             }
             tt?.remove();
             tt = thisTt;
-            tt.textContent = target.getAttribute('sttt--title');
+            tt.textContent = target.getAttribute('data-sttt--title');
             tt.style.setProperty('--left', `${evt.clientX + 10}`);
             tt.style.setProperty('--top', `${evt.clientY + 15}`);
             tt.style.setProperty('--right', `${window.innerWidth - evt.clientX}`);
@@ -53,6 +53,9 @@ const registerTooltips = ()=>{
         });
         target.addEventListener('pointerleave', ()=>{
             thisTt?.remove();
+            if (tt == thisTt) {
+                tt = null;
+            }
             window.removeEventListener('pointerdown', pointerDown);
         });
     }
@@ -61,5 +64,19 @@ const registerTooltips = ()=>{
 const init = ()=>{
     const mo = new MutationObserver(muts=>registerTooltips());
     mo.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['title'] });
+    window.addEventListener('pointermove', (evt)=>{
+        if (!tt) return;
+        tt.style.setProperty('--left', `${evt.clientX + 10}`);
+        tt.style.setProperty('--top', `${evt.clientY + 15}`);
+        tt.style.setProperty('--right', `${window.innerWidth - evt.clientX}`);
+        tt.style.setProperty('--bottom', `${window.innerHeight - evt.clientY}`);
+        const rect = tt.getBoundingClientRect();
+        if (rect.right > window.innerWidth - 10) {
+            tt.classList.add('sttt--flip-h');
+        }
+        if (rect.bottom > window.innerHeight - 10) {
+            tt.classList.add('sttt--flip-v');
+        }
+    });
 };
 init();

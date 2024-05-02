@@ -10,7 +10,7 @@
 
 	font-size: smaller;
 	padding: 0.25em 0.5em;
-	white-space: pre-line;
+	white-space: pre-wrap;
 
 	display: -webkit-box;
 	-webkit-line-clamp: 16;
