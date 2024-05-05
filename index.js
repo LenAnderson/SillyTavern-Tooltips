@@ -3,7 +3,7 @@ let tt;
 
 const registerTooltips = ()=>{
     /**@type {HTMLElement[]} */
-    const targets = Array.from(document.querySelectorAll('[title]:not(.template_element):not(option)')).filter(it=>!it.closest('.template_element'));
+    const targets = Array.from(document.querySelectorAll('[title]:not(.template_element):not(select > option)')).filter(it=>!it.closest('.template_element'));
     for (const target of targets) {
         if (target.classList.contains('sttt--enabled')) {
             if (target.hasAttribute('title')) {
