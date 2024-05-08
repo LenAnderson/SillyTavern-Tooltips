@@ -33,6 +33,7 @@ const registerTooltips = ()=>{
             tt?.remove();
             tt = thisTt;
             tt.textContent = target.getAttribute('data-sttt--title');
+            if (tt.textContent.trim().length == 0) return;
             tt.style.setProperty('--left', `${evt.clientX + 10}`);
             tt.style.setProperty('--top', `${evt.clientY + 15}`);
             tt.style.setProperty('--right', `${window.innerWidth - evt.clientX}`);
