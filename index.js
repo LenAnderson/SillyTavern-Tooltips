@@ -18,12 +18,13 @@ const registerTooltips = ()=>{
         let thisTt;
         const pointerDown = ()=>{
             window.removeEventListener('pointerdown', pointerDown);
+            window.removeEventListener('keydown', pointerDown);
             thisTt?.remove();
         };
         target.addEventListener('pointerenter', (evt)=>{
             if (evt.target != target) {
                 if (evt.target.classList.contains('sttt--enabled')) return;
-                if (evt.closest('.sttt--enabled') != target) return;
+                if (evt.target.closest('.sttt--enabled') != target) return;
             }
             if (!thisTt) {
                 thisTt = document.createElement('div'); {
@@ -51,6 +52,7 @@ const registerTooltips = ()=>{
             }
             tt.classList.add('sttt--active');
             window.addEventListener('pointerdown', pointerDown);
+            window.addEventListener('keydown', pointerDown);
         });
         target.addEventListener('pointerleave', ()=>{
             thisTt?.remove();
@@ -58,6 +60,7 @@ const registerTooltips = ()=>{
                 tt = null;
             }
             window.removeEventListener('pointerdown', pointerDown);
+            window.removeEventListener('keydown', pointerDown);
         });
     }
 };
