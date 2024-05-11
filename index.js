@@ -7,7 +7,7 @@ const registerTooltips = ()=>{
     for (const target of targets) {
         if (target.classList.contains('sttt--enabled')) {
             if (target.hasAttribute('title')) {
-                target.setAttribute('sttt-title', target.title.replace(/\r(?!\n)/g, '\n'));
+                target.setAttribute('data-sttt--title', target.title.replace(/\r(?!\n)/g, '\n'));
                 target.removeAttribute('title');
             }
             continue;
