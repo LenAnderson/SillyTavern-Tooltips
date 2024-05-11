@@ -33,8 +33,16 @@ const registerTooltips = ()=>{
             }
             tt?.remove();
             tt = thisTt;
-            tt.textContent = target.getAttribute('data-sttt--title');
-            if (tt.textContent.trim().length == 0) return;
+            const text = target.getAttribute('data-sttt--title');
+            if (text.trim().length == 0) return;
+            tt.innerHTML = '';
+            for (const line of text.split('\n')) {
+                if (/^[\u002D\u058A\u05BE\u2010\u2011\u2012\u2013\u2014\u2015\u2E3A\u2E3B\uFE58\uFE63\uFF0D]{2,}$/.test(line)) {
+                    tt.append(document.createElement('sttt-sep'));
+                } else {
+                    tt.append(`${line}\n`);
+                }
+            }
             tt.style.setProperty('--left', `${evt.clientX + 10}`);
             tt.style.setProperty('--top', `${evt.clientY + 15}`);
             tt.style.setProperty('--right', `${window.innerWidth - evt.clientX}`);

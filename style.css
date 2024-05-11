@@ -42,4 +42,11 @@
 	}
 	z-index: 10000;
 	pointer-events: none;
+
+	> sttt-sep {
+		background-color: var(--SmartThemeBorderColor);
+		display: block;
+		height: 1px;
+		margin: 0.5em -0.5em
+	}
 }
