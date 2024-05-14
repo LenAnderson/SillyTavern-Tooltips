@@ -40,7 +40,7 @@
 			max-height: calc(100vh - var(--bottom) * 1px - 10px);
 		}
 	}
-	z-index: 10000;
+	z-index: 40000;
 	pointer-events: none;
 
 	> sttt-sep {
