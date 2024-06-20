@@ -1,4 +1,6 @@
 .sttt--tooltip {
+	--layer-left: 0;
+	--layer-top: 0;
 	--left: 0;
 	--top: 0;
 	--right: 0;
@@ -11,6 +13,7 @@
 	font-size: smaller;
 	padding: 0.25em 0.5em;
 	white-space: pre-wrap;
+	text-align: left;
 
 	display: -webkit-box;
 	-webkit-line-clamp: 16;
@@ -18,26 +21,26 @@
 	overflow: hidden;
 
 	position: fixed;
-	left: calc(var(--left) * 1px);
+	left: calc((var(--left) - var(--layer-left)) * 1px);
 	&.sttt--flip-h {
 		left: unset;
-		right: calc(var(--right) * 1px);
+		right: calc((var(--right) - var(--layer-left)) * 1px);
 	}
-	top: calc(var(--top) * 1px);
+	top: calc((var(--top) - var(--layer-top)) * 1px);
 	&.sttt--flip-v {
 		top: unset;
-		bottom: calc(var(--bottom) * 1px);
+		bottom: calc((var(--bottom) - var(--layer-top)) * 1px);
 	}
 
 	max-width: 50vw;
 	&.sttt--active {
-		max-width: min(50vw, calc(100vw - var(--left) * 1px - 10px));
+		max-width: min(50vw, calc(100vw - (var(--left) - var(--layer-left)) * 1px - 10px));
 		&.sttt--flip-h {
-			max-width: min(50vw, calc(100vw - var(--right) * 1px - 10px));
+			max-width: min(50vw, calc(100vw - (var(--right) - var(--layer-left)) * 1px - 10px));
 		}
-		max-height: calc(100vh - var(--top) * 1px - 10px);
+		max-height: calc(100vh - (var(--top) - var(--layer-top)) * 1px - 10px);
 		&.sttt--flip-v {
-			max-height: calc(100vh - var(--bottom) * 1px - 10px);
+			max-height: calc(100vh - (var(--bottom) - var(--layer-top)) * 1px - 10px);
 		}
 	}
 	z-index: 40000;
